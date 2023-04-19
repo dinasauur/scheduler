@@ -4,7 +4,7 @@ import { render, cleanup } from "@testing-library/react";
 
 import DayListItem from "components/DayListItem";
 
-afterEach(cleanup);
+afterEach(cleanup); // cleans up the body after each test
 
 it("renders without crashing", () => {
   render(<DayListItem />)
@@ -12,7 +12,7 @@ it("renders without crashing", () => {
 
 it("renders 'no spots remaining' when there are 0 spots", () => {
   const { getByText } = render(<DayListItem name="Monday" spots={0} />);
-  expect(getByText('no spots remaining')).toBeInTheDocument();
+  expect(getByText("No spots remaining")).toBeInTheDocument();
 });
 
 it("renders '1 spot remaining' when there is 1 spot", () => {
