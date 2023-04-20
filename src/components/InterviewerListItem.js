@@ -13,13 +13,13 @@ function InterviewerListItem(props) {
   })
 
   return (
-    <li className={interviewerClass} onClick={() => props.setInterviewer(props.id)}>
+    <li className={interviewerClass} onClick={props.setInterviewer}>
       <img
         className={imageClass}
         src={props.avatar}
         alt={props.name}
       />
-      {props.selected ? props.name : null}
+      {props.selected && props.name}
     </li>
   );
 }
