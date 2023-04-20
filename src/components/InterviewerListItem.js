@@ -12,3 +12,5 @@ function InterviewerListItem(props) {
     </li>
   );
 }
+
+export default InterviewerListItem;
