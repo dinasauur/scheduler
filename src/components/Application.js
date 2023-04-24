@@ -14,6 +14,8 @@ export default function Application(props) {
     appointments: {}
   });
 
+  const dailyAppointments = [];
+
   const setDay = day => setState({...state, day});
   const setDays = days => setState(prev => ({...prev, days}));
 
@@ -24,7 +26,7 @@ export default function Application(props) {
   }, []);
   // when a component does not have any dependencies but we only want it to run once, we have to pass an empty array
 
-  const appointmentsArray = Object.values(appointments).map(appointment => {
+  const appointmentsArray = dailyAppointments.map(appointment => {
     return (
     <Appointment
       key={appointment.id}
