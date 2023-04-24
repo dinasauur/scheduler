@@ -50,7 +50,7 @@ export default function Application(props) {
 
   useEffect(() => {
     axios.get('/api/days')
-    .then(response => setDay(response.data))
+    .then(response => setDay([...response.data]))
   }, []);
   // when a component does not have any dependencies but we only want it to run once, we have to pass an empty array
 
@@ -74,7 +74,7 @@ export default function Application(props) {
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
           <DayList
-            days={[]}
+            days={day}
             value={day}
             onChange={setDay}
           />
