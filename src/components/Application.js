@@ -53,9 +53,13 @@ export default function Application(props) {
     // appointments: {}
   });
 
+  const setDay = day => setState({...state, day});
+  const setDays = days => setState(prev => ({...prev, days}));
+
+
   useEffect(() => {
     axios.get('/api/days')
-    .then(response => setDay([...response.data]))
+    .then(response => setDays([...response.data]))
   }, []);
   // when a component does not have any dependencies but we only want it to run once, we have to pass an empty array
 
@@ -81,7 +85,7 @@ export default function Application(props) {
           <DayList
             day={state.day}
             days={state.days}
-            value={day}
+            value={state.day}
             onChange={setDay}
           />
         </nav>
