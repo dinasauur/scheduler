@@ -14,7 +14,7 @@ export function getAppointmentsForDay(state, specifiedDay) {
 
   return appointmentForTheDay;
 
-  //// THERE HAS TO BE A BETTER WAY TO DO THIS. ASK MENTOR TO REVIEW OTHER OPTIONS.
+  //// IS THERE A BETTER WAY TO DO THIS. ASK MENTOR TO REVIEW OTHER OPTIONS.
 
   // OPTION 2
   // state.days.map(resultDay => {
@@ -55,5 +55,17 @@ export function getAppointmentsForDay(state, specifiedDay) {
   // })
 
   // console.log(selectedDayAppointment)
+}
 
+export function getInterview(state, interview) {
+  if (!interview) {
+    return null;
+  }
+
+  const interviewData = state.interviewers[interview.interviewer]
+
+  return {
+    student: interview.student,
+    interviewer: interviewData
+  }
 }
