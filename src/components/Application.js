@@ -17,12 +17,16 @@ export default function Application(props) {
   const dailyAppointments = [];
 
   const setDay = day => setState({...state, day});
-  const setDays = days => setState(prev => ({...prev, days}));
 
 
   useEffect(() => {
-    axios.get('/api/days')
-    .then(response => setDays([...response.data]))
+    Promise.all([
+      axios.get('/api/days'),
+      axios.get('/api/appointments')
+    ])
+    .then((all) => {
+      setState(prev => ({...prev, days: all[0].data, appointments: all[1].data}))
+    })
   }, []);
   // when a component does not have any dependencies but we only want it to run once, we have to pass an empty array
 
