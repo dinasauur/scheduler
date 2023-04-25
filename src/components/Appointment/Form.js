@@ -15,12 +15,10 @@ export default function Form(props) {
     reset()
     props.onCancel()
   };
-
-  // useEffect(() => {
+  
     const save = () => {
       props.onSave(student, interviewer)
     }
-  // })
  
   return (
     <main className="appointment__card appointment__card--create">
