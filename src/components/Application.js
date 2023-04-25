@@ -32,6 +32,10 @@ export default function Application(props) {
   }, []);
   // when a component does not have any dependencies but we only want it to run once, we have to pass an empty array
   
+  function bookInterview(id, interview) {
+    console.log(id, interview);
+  }
+
   const appointmentsArray = dailyAppointments.map(appointment => {
     const interview = getInterview(state, appointment.interview)
     return (
@@ -40,6 +44,7 @@ export default function Application(props) {
       {...appointment}
       interview={interview}
       interviewers={dailyInterviewers}
+      bookInterview={bookInterview}
     />
     );
   });
