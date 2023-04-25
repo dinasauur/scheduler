@@ -25,9 +25,12 @@ export default function Appointment(props) {
       interviewer
     };
 
+    // handle promise again because transition function is only available in this file
     props.bookInterview(props.id, interview)
-    
-    transition(SHOW)
+    .then(() => {
+      transition(SHOW);
+    })
+    // .catch <-- handle error in case put request fails
   }
 
   return (

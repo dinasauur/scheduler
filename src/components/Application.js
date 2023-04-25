@@ -4,7 +4,11 @@ import axios from 'axios';
 import 'components/Application.scss';
 import DayList from './DayList';
 import Appointment from './Appointment';
-import { getAppointmentsForDay, getInterview, getInterviewersForDay } from 'helpers/selectors';
+import {
+  getAppointmentsForDay,
+  getInterview,
+  getInterviewersForDay,
+} from 'helpers/selectors';
 
 export default function Application(props) {
   const [state, setState] = useState({
@@ -53,8 +57,17 @@ export default function Application(props) {
       [id]: appointment,
     };
 
-    // save the new appointments object back into state
-    setState({ ...state, appointments });
+    // make data persistent so that when we refresh browser, the saved data is not lost (it gets lost because we are only updating the state locally).
+    // Use axios to make request to  API to update the appontment with the interview
+    //// Two things to happen: 
+    //// (promise handle in application.js) 1. save the new info to the database and setState for storing the new object for front end
+    //// (promise handle in appointments/index.js) 2. Update the UI using transition function where it's calling props.bookInterview  
+    return axios
+    .put(`/api/appointments/${id}`, { interview }) // object notation because interview IS an object
+    .then(() => {
+        // save the new appointments object back into state
+        setState({ ...state, appointments });
+      });
   }
 
   const appointmentsArray = dailyAppointments.map((appointment) => {
@@ -80,11 +93,7 @@ export default function Application(props) {
         />
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
-          <DayList 
-            days={state.days} 
-            value={state.day} 
-            onChange={setDay} 
-          />
+          <DayList days={state.days} value={state.day} onChange={setDay} />
         </nav>
         <img
           className="sidebar__lhl sidebar--centered"
@@ -92,10 +101,7 @@ export default function Application(props) {
           alt="Lighthouse Labs"
         />
       </section>
-      <section className="schedule">
-        {appointmentsArray}
-        {/* Replace this with the schedule elements durint the "The Scheduler" activity. */}
-      </section>
+      <section className="schedule">{appointmentsArray}</section>
     </main>
   );
 }
