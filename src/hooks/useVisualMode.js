@@ -28,18 +28,21 @@ export default function useVisualMode(initial) {
 
   // STEP 3.3
   function back() {
-    // where to go back -> basically, where is the destination?
-    const nextMode = history[0];
-    
-    // remove that from array --> updating history
-    setHistory((history) => {
-      const updateHistory = [...history] // state is immutable (cannot be changed), prevents accidental update of state. Provides stability to the application. 
-      updateHistory.shift();
-      return updateHistory;
-    })
-    
-    // go back to the first element, which would be whatever that replaced the previous one sitting on index 0. 
-    setMode(nextMode);
+    if (history.length > 1) { // setting back limit
+      
+      // where to go back -> basically, where is the destination?
+      const nextMode = history[0];
+      
+      // remove that from array --> updating history
+      setHistory((history) => {
+        const updateHistory = [...history] // state is immutable (cannot be changed), prevents accidental update of state. Provides stability to the application. 
+        updateHistory.shift();
+        return updateHistory;
+      })
+      
+      // go back to the first element, which would be whatever that replaced the previous one sitting on index 0. 
+      setMode(nextMode);
+    }
   }
 
   return { mode, transition, back };
