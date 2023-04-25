@@ -70,6 +70,24 @@ export default function Application(props) {
       });
   }
 
+  // use appointment id to find the right appointment and set it's interview data to null
+  function cancelInterview(id) {
+
+   const appointment = {
+    ...state.appointments[id],
+    interview: null
+   };
+
+   const appointments = {
+    ...state.appointments,
+    [id]: appointment
+   };
+
+   setState({...state, appointments});
+   // axios
+  
+  }
+
   const appointmentsArray = dailyAppointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
     return (
@@ -79,6 +97,7 @@ export default function Application(props) {
         interview={interview}
         interviewers={dailyInterviewers}
         bookInterview={bookInterview}
+        cancelInterview={cancelInterview}
       />
     );
   });
