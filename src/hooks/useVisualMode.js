@@ -15,15 +15,19 @@ export default function useVisualMode(initial) {
   const [history, setHistory] = useState([initial]); // Initializing our history as an array with the first mode that gets passed to useVisualMode.
 
   // STEP 2
-  function transition(nextMode) {
+  function transition(nextMode, replace=false) {
     setMode(nextMode); // first thing
 
-    // STEP 3.2
-    // second thing - grab current page and push to the history array
-    setHistory((history) => { return [mode, ...history] })
-    // history = ['update', 'delete']
-    // mode = 'create' 
-    // --> ['create', 'update', 'delete'] 
+    if (!replace) { // Transition with replace, When replace is true then set the history to reflect that we are replacing the current mode.
+
+      // STEP 3.2
+      // second thing - grab current page and push to the history array
+      setHistory((history) => { return [mode, ...history] })
+      // history = ['update', 'delete']
+      // mode = 'create' 
+      // --> ['create', 'update', 'delete'] 
+    }
+
   }
 
   // STEP 3.3
