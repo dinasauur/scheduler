@@ -55,9 +55,10 @@ export default function useApplicationData() {
     .put(`/api/appointments/${id}`, { interview }) // object notation because interview IS an object
     .then(() => {
         // save the new appointments object back into state
-        setState({ ...state, appointments });
+        setState({ ...state, appointments, spots: spotsRemaining(id, appointments)});
       });
   };
+
 
   // use appointment id to find the right appointment and set it's interview data to null
   function cancelInterview(id) {
@@ -75,8 +76,44 @@ export default function useApplicationData() {
    return axios
    .delete(`/api/appointments/${id}`)
    .then(() => {
-     setState({...state, appointments});
+     setState({...state, appointments, spots: spotsRemaining(id, appointments)});
    });
+  };
+
+
+// Where is the value of "spots" stored for each day?
+//// dayList update spots: [length of appointments] --> max 5. 
+
+// How can we calculate how many spots should be available?
+//// 5 - appointments.intervies.length
+
+// When should that value change?
+//// value should change whenever an appointment is booked, value should add by 1. 
+//// condition to add: no more than 5 per day
+
+
+// if successfully update database, then I want to update the spots remaining
+// get access to spots remaining
+
+//// value should change when an appointment is deleted, value should decrease by 1
+//// condition: no less than 0 ??????
+
+// these props are passed when i call the function somewhere
+  function spotsRemaining(appointmentId, appointments) {
+
+    // iterate over the appointments array for that day
+    const dayWithAppointmentId = state.days.find(day => {
+      day.appointments.includes(appointmentId); // returns true or false
+    }) // returns day with that appointment id --> day includes appointments object
+
+    const nullAppointments = dayWithAppointmentId.appointments.filter((id) => {
+      return !appointments[id].interview;
+    }) // returns [nullId, nullId, nullId]
+
+    const spotsAvailable = nullAppointments.length;
+
+    return state.days.map(day => day.appointments.includes(appointmentId) ? {...day, spots: spotsAvailable} : day);
+    // not returning copy of days array...just updating it with new spots value
   };
 
   return { state, setDay, bookInterview, cancelInterview }
