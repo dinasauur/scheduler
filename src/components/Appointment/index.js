@@ -37,9 +37,7 @@ export default function Appointment(props) {
     // handle promise again because transition function is only available in this file
     props.bookInterview(props.id, interview)
     .then(() => transition(SHOW))
-    .catch(() => {
-      transition(ERROR_SAVE);
-    })
+    .catch(() => transition(ERROR_SAVE))
   }
 
   function remove() {
@@ -47,9 +45,7 @@ export default function Appointment(props) {
     
     props.cancelInterview(props.id)
     .then(() => transition(EMPTY))
-    .catch(() => {
-      transition(ERROR_DELETE);
-    })
+    .catch(() => transition(ERROR_DELETE))
   }
 
   //////////////// crazy error.... if i save an appointment with zero input, it crashes

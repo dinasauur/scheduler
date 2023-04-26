@@ -22,7 +22,7 @@ export default function useVisualMode(initial) {
 
       // STEP 3.2
       // second thing - grab current page and push to the history array
-      setHistory((history) => { return [mode, ...history] })
+      setHistory((prev) => { return [mode, ...prev] })
       // history = ['update', 'delete']
       // mode = 'create' 
       // --> ['create', 'update', 'delete'] 
@@ -38,8 +38,8 @@ export default function useVisualMode(initial) {
       const nextMode = history[0];
       
       // remove that from array --> updating history
-      setHistory((history) => {
-        const updateHistory = [...history] // state is immutable (cannot be changed), prevents accidental update of state. Provides stability to the application. 
+      setHistory((prev) => {
+        const updateHistory = [...prev] // state is immutable (cannot be changed), prevents accidental update of state. Provides stability to the application. 
         updateHistory.shift();
         return updateHistory;
       })
