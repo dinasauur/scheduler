@@ -88,7 +88,7 @@ export default function Appointment(props) {
       }
       {mode === ERROR_SAVE &&
       <Error 
-        message='Something went wrong while creating the appointment. Please try again.'
+        message='Something went wrong. Please try again.'
         onClose={back}
       />
       }
