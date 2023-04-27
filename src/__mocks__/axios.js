@@ -94,11 +94,11 @@ export default {
     });
   }),
 
-  // delete: jest.fn((url) => {
-  //   return Promise.resolve({
-  //     status: 200,
-  //     statusText: 'OK. Delete data success.',
-  //     data: fixtures.appointments
-  //   })
-  // })
+  delete: jest.fn((url) => {
+    return Promise.resolve({
+      status: 200,
+      statusText: 'OK. Delete data success.',
+      data: fixtures.appointments
+    })
+  })
 };
