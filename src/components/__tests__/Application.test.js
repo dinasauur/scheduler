@@ -7,13 +7,13 @@ import {
   fireEvent,
   getByText,
   getByPlaceholderText,
-  prettyDOM,
   getAllByTestId,
   getByAltText,
   queryByText,
 } from '@testing-library/react';
 
 import Application from 'components/Application';
+import axios from '__mocks__/axios';
 
 afterEach(cleanup);
 
@@ -21,7 +21,6 @@ describe('Application', () => {
   it('defaults to Monday and changes the schedule when a new day is selected', async () => {
     const { getByText } = render(<Application />);
 
-    //  waitForElement is a function that returns a DOM node. In this case, it is looking for something based on the text "Monday"
     await waitForElement(() => getByText('Monday'));
 
     fireEvent.click(getByText('Tuesday'));
@@ -114,32 +113,11 @@ describe('Application', () => {
     expect(getByText(day, '1 spot remaining')).toBeInTheDocument();
   });
 
-  it ('shows the save error when failing to save an appointment', async () => {
-    // test plan
-    // render ccomponent
-    // wait for 'Archie Cohen' to show
-    // grab the empty appointment
-    // click add button
-    // change name to 'Lydia Miller-Jones'
-    // click interviewer 'Sylvia Palmer'
-    // click save button
-    // create mock fuunction to fake an error mockRejectedValueOnce
-    // save error message should show
-    // click x to close error message
-    // expect to see add button in document
+  it('shows the save error when failing to save an appointment', async () => {
+    axios.put.mockRejectedValueOnce();
   });
 
-  it ('shows the delete error when failing to delete an existing appointment', async () => {
-    // test plan
-    // render ccomponent
-    // wait for 'Archie Cohen' to show
-    // grab that appointment with text Archie Cohen
-    // click delete button
-    // create mock function to fake an error mockRejectedValueOnce
-    // delete error message should show
-    // click x to close error message
-    // expect to see 'archie cohen' in document
+  it('shows the delete error when failing to delete an existing appointment', async () => {
+    axios.delete.mockRejectedValueOnce();
   });
-
-
 });
