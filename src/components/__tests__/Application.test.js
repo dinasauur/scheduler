@@ -87,7 +87,7 @@ describe('Application', () => {
   });
 
   it('loads data, edits an interview and keeps the spots remaining for Monday the same', async () => {
-    const { container, debug } = render(<Application />);
+    const { container } = render(<Application />);
 
     await waitForElement(() => getByText(container, 'Archie Cohen'));
 
@@ -97,10 +97,8 @@ describe('Application', () => {
 
     fireEvent.click(getByAltText(appointment, 'Edit'));
 
-    // expect(getByText(appointment, 'Archie Cohen')).toBeInTheDocument();
-
     fireEvent.change(getByPlaceholderText(appointment, 'Enter Student Name'), {
-      target: { value: 'Lydia Miller-Jones' }
+      target: { value: 'Lydia Miller-Jones' },
     });
 
     fireEvent.click(getByAltText(appointment, 'Sylvia Palmer'));
@@ -109,8 +107,39 @@ describe('Application', () => {
 
     expect(getByText(appointment, 'Saving...')).toBeInTheDocument();
 
-    const day = getAllByTestId(container, 'day').find(day => queryByText(day, 'Monday'));
+    const day = getAllByTestId(container, 'day').find((day) =>
+      queryByText(day, 'Monday')
+    );
 
     expect(getByText(day, '1 spot remaining')).toBeInTheDocument();
   });
+
+  it ('shows the save error when failing to save an appointment', async () => {
+    // test plan
+    // render ccomponent
+    // wait for 'Archie Cohen' to show
+    // grab the empty appointment
+    // click add button
+    // change name to 'Lydia Miller-Jones'
+    // click interviewer 'Sylvia Palmer'
+    // click save button
+    // create mock fuunction to fake an error mockRejectedValueOnce
+    // save error message should show
+    // click x to close error message
+    // expect to see add button in document
+  });
+
+  it ('shows the delete error when failing to delete an existing appointment', async () => {
+    // test plan
+    // render ccomponent
+    // wait for 'Archie Cohen' to show
+    // grab that appointment with text Archie Cohen
+    // click delete button
+    // create mock function to fake an error mockRejectedValueOnce
+    // delete error message should show
+    // click x to close error message
+    // expect to see 'archie cohen' in document
+  });
+
+
 });
