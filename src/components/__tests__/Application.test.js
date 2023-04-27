@@ -8,15 +8,15 @@ afterEach(cleanup);
 
 describe('Application', () => {
   // application loads without crashing and makes the requests to the API server to retrieve appointment data to display in the schedule
-  it("defaults to Monday and changes the schedule when a new day is selected", () => {
+  it("defaults to Monday and changes the schedule when a new day is selected", async () => {
     const { getByText } = render(<Application />);
 
     //  waitForElement is a function that returns a DOM node. In this case, it is looking for something based on the text "Monday"
-    return waitForElement(() => getByText('Monday'))
-    .then(() => {
-      fireEvent.click(getByText('Tuesday'));
-      expect(getByText('Leopold Silvers')).toBeInTheDocument();
-    })
+    await waitForElement(() => getByText('Monday'))
+    
+    fireEvent.click(getByText('Tuesday'));
+
+    expect(getByText('Leopold Silvers')).toBeInTheDocument();
   });
   
 })
