@@ -65,7 +65,7 @@ export default {
       return Promise.resolve({
         status: 200,
         statusText: 'OK',
-        data: fixtures.days
+        data: fixtures.days,
       });
     }
 
@@ -73,7 +73,7 @@ export default {
       return Promise.resolve({
         status: 200,
         statusText: 'OK',
-        data: fixtures.appointments
+        data: fixtures.appointments,
       });
     }
 
@@ -81,8 +81,24 @@ export default {
       return Promise.resolve({
         status: 200,
         statusText: 'OK',
-        data: fixtures.interviewers
+        data: fixtures.interviewers,
       });
     }
   }),
+
+  put: jest.fn((url) => {
+    return Promise.resolve({
+      status: 200,
+      statusText: 'OK. Update data success.',
+      data: fixtures.appointments,
+    });
+  }),
+
+  // delete: jest.fn((url) => {
+  //   return Promise.resolve({
+  //     status: 200,
+  //     statusText: 'OK. Delete data success.',
+  //     data: fixtures.appointments
+  //   })
+  // })
 };

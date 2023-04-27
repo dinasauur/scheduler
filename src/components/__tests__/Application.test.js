@@ -34,9 +34,8 @@ describe('Application', () => {
     
     await waitForElement(() => getByText(container, 'Archie Cohen'));
 
-    const appointment = getAllByTestId(container, 'appointment')[0];
-
-    // expect(getByText('Archie Cohen')).toBeInTheDocument();
+    const appointments = getAllByTestId(container, 'appointment');
+    const appointment = appointments[0];
 
     fireEvent.click(getByAltText(appointment, 'Add'));
 
@@ -48,6 +47,7 @@ describe('Application', () => {
 
     fireEvent.click(getByText(appointment, 'Save'));
 
+    console.log(prettyDOM(appointment));
 
 // Check that the element with the text "Saving" is displayed.
 // Wait until the element with the text "Lydia Miller-Jones" is displayed.
