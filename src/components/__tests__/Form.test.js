@@ -21,8 +21,8 @@ describe('Form', () => {
   });
 
   it('renders with initial student name', () => {
-    const { getByTestId } = render(<Form interviewers={interviewers} name='Lydia Miller-Jones' />);
-    expect(getByTestId('student-name-input').toHaveValue('Lydia Miller-Jones'));
+    const { getByTestId } = render(<Form interviewers={interviewers} student='Lydia Miller-Jones' />);
+    expect(getByTestId('student-name-input')).toHaveValue('Lydia Miller-Jones');
   });
 
   it("validates that the student name is not blank", () => {
@@ -47,7 +47,7 @@ describe('Form', () => {
   
     /* 2. Render the Form with interviewers and the onSave mock function passed as an onSave prop, the interviewer prop should be null */
     const { getByText } = render(
-    <Form interviewers={interviewers} onSave={onSave} name='Lydia Miller-Jones'/>
+    <Form interviewers={interviewers} onSave={onSave} student='Lydia Miller-Jones'/>
     );
 
     /* 3. Click the save button */
@@ -66,7 +66,7 @@ describe('Form', () => {
     <Form 
       interviewers={interviewers} 
       onSave={onSave} 
-      name='Lydia Miller-Jones' 
+      student='Lydia Miller-Jones' 
       interviewer={interviewers[0].id} 
     />)
 
