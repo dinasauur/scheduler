@@ -57,4 +57,16 @@ describe('Application', () => {
 
     expect(getByText(day, /no spots remaining/i)).toBeInTheDocument();
   });
+
+  it('loads data, cancels an inerview and increases the spots remaining for Monday by 1', async () => {
+    // Test plan
+    // 1. render the app
+    // 2. wait until the text "Arcchie Cohen" is displayed
+    // 3. Click the delete button on that same appointment
+    // 4. Check that confirm message come up "Are you sure you would like to delete"
+    // 5. Click the confirm button
+    // 6. check that text 'deleting...' shows up
+    // 7. wait for the add button to show up
+    // 8. check that the dylistiitem with text 'monday' also has text '2 spots remaining'
+  })
 });
