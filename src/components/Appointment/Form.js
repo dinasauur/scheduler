@@ -17,10 +17,6 @@ export default function Form(props) {
     props.onCancel();
   };
 
-  // const save = () => {
-  //   props.onSave(student, interviewer);
-  // };
-
   function validate() {
 
     // code for checking student's name
@@ -35,6 +31,7 @@ export default function Form(props) {
       return;
     }
 
+    setError('');
     props.onSave(student, interviewer) // compass shows to use name instead of student
   };
 
