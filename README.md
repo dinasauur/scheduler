@@ -9,6 +9,8 @@ The Interviewer Scheduler is an app that allows users to book and cancel intervi
 - Storybook
 - Jest
 - Cypress
+- @testing-library/react-hooks
+- react-test-renderer
 
 ## Quick glance of the project
 
