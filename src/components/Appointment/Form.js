@@ -18,7 +18,6 @@ export default function Form(props) {
   };
 
   function validate() {
-
     // code for checking student's name
     if (student === '') {
       setError('Student name cannot be blank');
@@ -32,8 +31,8 @@ export default function Form(props) {
     }
 
     setError('');
-    props.onSave(student, interviewer) // compass shows to use name instead of student
-  };
+    props.onSave(student, interviewer);
+  }
 
   const onSubmit = (event) => event.preventDefault();
 

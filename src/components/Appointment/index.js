@@ -29,23 +29,25 @@ export default function Appointment(props) {
   function save(name, interviewer) {
     const interview = {
       student: name,
-      interviewer
+      interviewer,
     };
 
     transition(SAVING);
 
     // handle promise again because transition function is only available in this file
-    props.bookInterview(props.id, interview)
-    .then(() => transition(SHOW))
-    .catch(() => transition(ERROR_SAVE, true));
+    props
+      .bookInterview(props.id, interview)
+      .then(() => transition(SHOW))
+      .catch(() => transition(ERROR_SAVE, true));
   }
 
   function remove() {
     transition(DELETING, true);
-    
-    props.cancelInterview(props.id)
-    .then(() => transition(EMPTY))
-    .catch(() => transition(ERROR_DELETE, true))
+
+    props
+      .cancelInterview(props.id)
+      .then(() => transition(EMPTY))
+      .catch(() => transition(ERROR_DELETE, true));
   }
 
   return (
@@ -56,46 +58,43 @@ export default function Appointment(props) {
         <Show
           student={props.interview.student}
           interviewer={props.interview.interviewer}
-          onDelete={()=> transition(CONFIRM)}
+          onDelete={() => transition(CONFIRM)}
           onEdit={() => transition(EDIT)}
         />
       )}
       {mode === CREATE && (
-        <Form 
-        interviewers={props.interviewers} 
-        onCancel={back} 
-        onSave={save} 
-        />
+        <Form interviewers={props.interviewers} onCancel={back} onSave={save} />
       )}
       {mode === SAVING && <Status message="Saving..." />}
       {mode === DELETING && <Status message="Deleting..." />}
-      {mode === CONFIRM && 
-        <Confirm 
-        message='Are you sure you would like to delete?' 
-        onCancel={back} 
-        onConfirm={remove} 
-        />}
-      {mode === EDIT &&
-        <Form 
-        student={props.interview.student}
-        interviewer={props.interview.interviewer.id}
-        interviewers={props.interviewers} 
-        onCancel={back} 
-        onSave={save} 
+      {mode === CONFIRM && (
+        <Confirm
+          message="Are you sure you would like to delete?"
+          onCancel={back}
+          onConfirm={remove}
         />
-      }
-      {mode === ERROR_SAVE &&
-      <Error 
-        message='Something went wrong. Please try again.'
-        onClose={back}
-      />
-      }
-       {mode === ERROR_DELETE &&
-      <Error 
-        message='Something went wrong while deleting the appointment. Please try again.'
-        onClose={back}
-      />
-      }
+      )}
+      {mode === EDIT && (
+        <Form
+          student={props.interview.student}
+          interviewer={props.interview.interviewer.id}
+          interviewers={props.interviewers}
+          onCancel={back}
+          onSave={save}
+        />
+      )}
+      {mode === ERROR_SAVE && (
+        <Error
+          message="Something went wrong. Please try again."
+          onClose={back}
+        />
+      )}
+      {mode === ERROR_DELETE && (
+        <Error
+          message="Something went wrong while deleting the appointment. Please try again."
+          onClose={back}
+        />
+      )}
     </article>
   );
 }

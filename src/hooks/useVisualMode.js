@@ -15,36 +15,39 @@ export default function useVisualMode(initial) {
   const [history, setHistory] = useState([initial]); // Initializing our history as an array with the first mode that gets passed to useVisualMode.
 
   // STEP 2
-  function transition(nextMode, replace=false) {
+  function transition(nextMode, replace = false) {
     setMode(nextMode); // first thing
 
-    if (!replace) { // Transition with replace, When replace is true then set the history to reflect that we are replacing the current mode.
+    if (!replace) {
+      // Transition with replace, When replace is true then set the history to reflect that we are replacing the current mode.
 
       // STEP 3.2
       // second thing - grab current page and push to the history array
-      setHistory((prev) => { return [mode, ...prev] })
+      setHistory((prev) => {
+        return [mode, ...prev];
+      });
       // history = ['update', 'delete']
-      // mode = 'create' 
-      // --> ['create', 'update', 'delete'] 
+      // mode = 'create'
+      // --> ['create', 'update', 'delete']
     }
-
   }
 
   // STEP 3.3
   function back() {
-    if (history.length > 1) { // setting back limit
-      
+    if (history.length > 1) {
+      // setting back limit
+
       // where to go back -> basically, where is the destination?
       const nextMode = history[0];
-      
+
       // remove that from array --> updating history
       setHistory((prev) => {
-        const updateHistory = [...prev] // state is immutable (cannot be changed), prevents accidental update of state. Provides stability to the application. 
+        const updateHistory = [...prev]; // state is immutable (cannot be changed), prevents accidental update of state. Provides stability to the application.
         updateHistory.shift();
         return updateHistory;
-      })
-      
-      // go back to the first element, which would be whatever that replaced the previous one sitting on index 0. 
+      });
+
+      // go back to the first element, which would be whatever that replaced the previous one sitting on index 0.
       setMode(nextMode);
     }
   }
