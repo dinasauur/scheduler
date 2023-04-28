@@ -57,9 +57,8 @@ const fixtures = {
   },
 };
 
-// we need to export our fake axios libraryu. The first test that we will write only need to mock the axios.get() function
-
 export default {
+  // get request
   get: jest.fn((url) => {
     if (url === '/api/days') {
       return Promise.resolve({
@@ -86,6 +85,7 @@ export default {
     }
   }),
 
+  // put request
   put: jest.fn((url) => {
     return Promise.resolve({
       status: 200,
@@ -94,6 +94,7 @@ export default {
     });
   }),
 
+  // delete request
   delete: jest.fn((url) => {
     return Promise.resolve({
       status: 200,
