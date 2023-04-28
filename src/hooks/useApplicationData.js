@@ -82,11 +82,11 @@ export default function useApplicationData() {
       [id]: appointment,
     };
 
-    // make data persistent so that when we refresh browser, the saved data is not lost (it gets lost because we are only updating the state locally).
-    // Use axios to make request to  API to update the appontment with the interview
-    //// Two things to happen:
-    //// (promise handle in application.js) 1. save the new info to the database and setState for storing the new object for front end
-    //// (promise handle in appointments/index.js) 2. Update the UI using transition function where it's calling props.bookInterview
+   /** Make data persistent so that when we refresh browser, the saved data is not lost (it gets lost because we are only updating the state locally).
+     * Use axios to make request to  API to update the appontment with the interview. 2 things to happen:
+     * (promise handle in application.js) 1. save the new info to the database and setState for storing the new object for front end
+     * (promise handle in appointments/index.js) 2. Update the UI using transition function where it's calling props.bookInterview
+     */
     return axios
       .put(`/api/appointments/${id}`, { interview }) // object notation because interview IS an object
       .then(() => {
