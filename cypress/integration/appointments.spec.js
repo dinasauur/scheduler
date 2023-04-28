@@ -7,7 +7,7 @@ describe('appointments', () => {
     cy.contains('Monday');
   });
 
-  xit('should book an interview', () => {
+  it('should book an interview', () => {
     cy.get('[alt=Add]').first().click();
 
     cy.get('[data-testid=student-name-input]').type('Lydia Miller-Jones');
@@ -19,7 +19,7 @@ describe('appointments', () => {
     cy.contains('.appointment__card--show', 'Sylvia Palmer');
   });
 
-  xit('should edit an interview', () => {
+  it('should edit an interview', () => {
     cy.get('[alt=Edit]').first().click({ force: true });
 
     cy.get('[data-testid="student-name-input"')

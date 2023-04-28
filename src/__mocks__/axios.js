@@ -98,7 +98,7 @@ export default {
     return Promise.resolve({
       status: 200,
       statusText: 'OK. Delete data success.',
-      data: fixtures.appointments
-    })
-  })
+      data: fixtures.appointments,
+    });
+  }),
 };

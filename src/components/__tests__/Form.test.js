@@ -11,7 +11,7 @@ import {
 
 import Form from 'components/Appointment/Form';
 
-afterEach(cleanup);// afterEach is a Jest method
+afterEach(cleanup); // afterEach is a Jest method
 
 describe('Form', () => {
   const interviewers = [
@@ -37,7 +37,6 @@ describe('Form', () => {
   });
 
   it('validates that the student name is not blank', () => {
-
     const onSave = jest.fn();
 
     const { getByText } = render(
@@ -72,8 +71,7 @@ describe('Form', () => {
     const { getByText, getByPlaceholderText, queryByText } = render(
       <Form 
         interviewers={interviewers} 
-        onSave={onSave} 
-        interviewer={1} 
+        onSave={onSave} interviewer={1} 
       />
     );
 
@@ -97,8 +95,8 @@ describe('Form', () => {
   it('calls onCancel and resets the input field', () => {
     const onCancel = jest.fn();
     const { getByText, getByPlaceholderText, queryByText } = render(
-      <Form 
-        interviewers={interviewers} 
+      <Form
+        interviewers={interviewers}
         student='Lydia Miller-Jones'
         onSave={jest.fn()}
         onCancel={onCancel}
@@ -107,9 +105,11 @@ describe('Form', () => {
 
     fireEvent.click(getByText('Save'));
 
-    fireEvent.change(getByPlaceholderText('Enter Student Name', {
-      target: { value: 'Lydia Miller-Jones'}
-    }));
+    fireEvent.change(
+      getByPlaceholderText('Enter Student Name', {
+        target: { value: 'Lydia Miller-Jones' },
+      })
+    );
 
     fireEvent.click(getByText('Cancel'));
 

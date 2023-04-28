@@ -9,7 +9,7 @@ import {
   getByPlaceholderText,
   getAllByTestId,
   getByAltText,
-  queryByText
+  queryByText,
 } from '@testing-library/react';
 
 import Application from 'components/Application';
